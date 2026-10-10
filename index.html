@@ -3,151 +3,892 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="CK Technologies builds software, mobile applications and digital solutions for businesses.">
-  <title>CK Technologies | Software Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090710">
+  <meta name="description" content="CK Technologies builds custom software, mobile applications, modern websites and practical digital business solutions.">
+  <title>CK Technologies | Software. Technology. Innovation.</title>
+
   <style>
+    :root {
+      --bg: #090710;
+      --surface: #110e1c;
+      --surface-light: #191329;
+      --purple: #a855f7;
+      --violet: #7c3aed;
+      --pink: #d8b4fe;
+      --text: #f8f7fc;
+      --muted: #aaa5b8;
+      --border: rgba(216, 180, 254, .14);
+      --max-width: 1160px;
+    }
+
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
     body {
       margin: 0;
-      color: #18181b;
-      background: #fff;
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.7;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    header {
-      max-width: 1100px;
-      margin: auto;
-      padding: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #eee;
-    }
-    .brand { font-size: 22px; font-weight: 800; letter-spacing: -1px; }
-    nav { display: flex; gap: 24px; }
+
     a { color: inherit; text-decoration: none; }
-    nav a:hover, .contact-link:hover { text-decoration: underline; }
-    main { max-width: 1100px; margin: auto; padding: 24px; }
-    .hero { padding: 100px 0 110px; max-width: 800px; }
-    .eyebrow {
-      color: #52525b; font-size: 12px;
-      letter-spacing: 2px; text-transform: uppercase;
+    button { font: inherit; }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin-inline: auto;
     }
-    h1 {
-      font-size: clamp(42px, 8vw, 76px);
-      letter-spacing: -3px; line-height: 1.08;
-      margin: 22px 0;
+
+    .ambient {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
     }
-    h2 { font-size: 32px; letter-spacing: -1px; }
-    .lead { font-size: 19px; color: #71717a; max-width: 650px; }
-    .section { padding: 45px 0 75px; }
-    .services {
+
+    .ambient::before,
+    .ambient::after {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: .18;
+    }
+
+    .ambient::before {
+      top: -230px;
+      left: -170px;
+      background: #7c3aed;
+    }
+
+    .ambient::after {
+      top: 400px;
+      right: -260px;
+      background: #a855f7;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(9, 7, 16, .84);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 750;
+      letter-spacing: -.5px;
+      font-size: 19px;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 28px;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #a855f7, #6d28d9);
+      color: white;
+      box-shadow: 0 0 28px rgba(168, 85, 247, .24);
+      font-size: 14px;
+      letter-spacing: -1px;
     }
-    .service {
-      padding: 26px;
-      border: 1px solid #e4e4e7;
-      border-radius: 14px;
-    }
-    .service h3 { margin-top: 0; }
-    .muted { color: #71717a; }
-    .contact {
-      padding: 32px;
-      border-radius: 14px;
-      background: #f4f4f5;
-    }
-    .contact-link { font-weight: 700; }
-    footer {
-      max-width: 1100px;
-      margin: auto;
-      padding: 28px 24px;
-      color: #71717a;
-      border-top: 1px solid #eee;
+
+    .brand span:last-child span { color: var(--pink); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      color: var(--muted);
       font-size: 14px;
     }
-    @media (max-width: 600px) {
-      header { align-items: flex-start; gap: 12px; flex-direction: column; }
-      nav { gap: 18px; flex-wrap: wrap; }
-      .hero { padding: 65px 0; }
-      h1 { letter-spacing: -2px; }
-      .services { grid-template-columns: 1fr; }
-      .contact { padding: 22px; }
+
+    .nav-links a:hover { color: white; }
+
+    .nav-links .nav-cta {
+      color: white;
+      padding: 10px 17px;
+      border: 1px solid rgba(216, 180, 254, .32);
+      border-radius: 10px;
+      transition: .2s ease;
+    }
+
+    .nav-links .nav-cta:hover {
+      background: rgba(168, 85, 247, .15);
+      border-color: var(--purple);
+    }
+
+    .menu-toggle {
+      display: none;
+      color: white;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      padding: 100px 0 110px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--pink);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2.1px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: var(--purple);
+    }
+
+    h1 {
+      max-width: 730px;
+      margin: 22px 0;
+      font-size: clamp(42px, 6.2vw, 76px);
+      line-height: 1.04;
+      letter-spacing: -3.8px;
+      font-weight: 750;
+    }
+
+    .gradient-text {
+      background: linear-gradient(100deg, #e9d5ff, #c084fc 55%, #8b5cf6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy {
+      max-width: 570px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 21px;
+      border-radius: 11px;
+      font-weight: 650;
+      font-size: 14px;
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+
+    .button:hover { transform: translateY(-2px); }
+
+    .button-primary {
+      color: white;
+      background: linear-gradient(120deg, #9333ea, #6d28d9);
+      box-shadow: 0 8px 32px rgba(124, 58, 237, .23);
+    }
+
+    .button-primary:hover {
+      box-shadow: 0 12px 38px rgba(124, 58, 237, .38);
+    }
+
+    .button-secondary {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .025);
+      color: #eee7f8;
+    }
+
+    .button-secondary:hover { background: var(--surface-light); }
+
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 35px;
+      color: #91899f;
+      font-size: 12px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #c084fc;
+      box-shadow: 0 0 12px #a855f7;
+    }
+
+    .visual {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 390px;
+    }
+
+    .orbit {
+      position: absolute;
+      width: min(100%, 370px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(192, 132, 252, .17);
+      border-radius: 50%;
+      animation: rotate 32s linear infinite;
+    }
+
+    .orbit::before,
+    .orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .orbit::before {
+      inset: 26px;
+      border: 1px dashed rgba(192, 132, 252, .16);
+    }
+
+    .orbit::after {
+      top: 12%;
+      left: 17%;
+      width: 10px;
+      height: 10px;
+      background: #d8b4fe;
+      box-shadow: 0 0 22px #a855f7;
+    }
+
+    .core {
+      width: 205px;
+      height: 205px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(216, 180, 254, .25);
+      border-radius: 42px;
+      transform: rotate(-8deg);
+      background:
+        radial-gradient(circle at 30% 20%, rgba(168, 85, 247, .26), transparent 55%),
+        linear-gradient(145deg, #211531, #100c19 70%);
+      box-shadow: 0 0 100px rgba(124, 58, 237, .19),
+        inset 0 1px rgba(255, 255, 255, .08);
+    }
+
+    .core-inner {
+      text-align: center;
+      transform: rotate(8deg);
+    }
+
+    .core-symbol {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -5px;
+      line-height: 1.3;
+      background: linear-gradient(120deg, white, #c084fc);
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .core-label {
+      color: #c4b5d8;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .float-card {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(19, 14, 31, .88);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .24);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .float-card .mini-icon {
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: rgba(168, 85, 247, .15);
+      color: #d8b4fe;
+      font-size: 17px;
+    }
+
+    .float-card strong { display: block; font-size: 12px; }
+    .float-card small { color: var(--muted); font-size: 10px; }
+    .card-one { top: 35px; right: -4px; }
+    .card-two { bottom: 42px; left: -14px; animation-delay: -2s; }
+
+    section { padding: 105px 0; }
+
+    .section-head {
+      max-width: 690px;
+      margin-bottom: 42px;
+    }
+
+    .section-head h2 {
+      margin: 13px 0;
+      font-size: clamp(32px, 4.5vw, 49px);
+      line-height: 1.15;
+      letter-spacing: -1.8px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .about-panel {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 55px;
+      padding: 45px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(25, 19, 41, .9), rgba(14, 11, 22, .8));
+    }
+
+    .about-tag {
+      align-self: start;
+      padding: 25px;
+      border: 1px solid rgba(168, 85, 247, .2);
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, rgba(124, 58, 237, .18), transparent 70%);
+    }
+
+    .about-tag .big-mark {
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -4px;
+    }
+
+    .about-tag p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .about-copy h3 {
+      margin: 0 0 14px;
+      font-size: 25px;
+      letter-spacing: -.7px;
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .principles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 23px;
+    }
+
+    .principles span {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: #d9c8ed;
+      font-size: 12px;
+    }
+
+    .services { background: rgba(255, 255, 255, .012); }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      position: relative;
+      padding: 30px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(25, 19, 41, .85), rgba(14, 11, 22, .9));
+      transition: border-color .25s, transform .25s, background .25s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(192, 132, 252, .5);
+      background: linear-gradient(145deg, rgba(37, 23, 57, .9), rgba(14, 11, 22, .95));
+    }
+
+    .service-card::after {
+      content: "";
+      position: absolute;
+      right: -55px;
+      bottom: -75px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: #7c3aed;
+      filter: blur(90px);
+      opacity: 0;
+      transition: opacity .3s;
+      pointer-events: none;
+    }
+
+    .service-card:hover::after { opacity: .3; }
+
+    .service-icon {
+      width: 49px;
+      height: 49px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 24px;
+      border: 1px solid rgba(192, 132, 252, .2);
+      border-radius: 14px;
+      background: rgba(168, 85, 247, .1);
+      color: #d8b4fe;
+      font-size: 22px;
+    }
+
+    .service-card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: -.4px;
+    }
+
+    .service-card p {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    .contact-panel {
+      position: relative;
+      padding: 60px 30px;
+      overflow: hidden;
+      text-align: center;
+      border: 1px solid rgba(192, 132, 252, .24);
+      border-radius: 26px;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, .24), transparent 65%),
+        linear-gradient(145deg, #171024, #0e0b17);
+    }
+
+    .contact-panel h2 {
+      max-width: 680px;
+      margin: 16px auto;
+      font-size: clamp(32px, 5vw, 53px);
+      line-height: 1.13;
+      letter-spacing: -2px;
+    }
+
+    .contact-panel p {
+      max-width: 520px;
+      margin: 0 auto 27px;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    footer {
+      padding: 28px 0;
+      border-top: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: #8f899c;
+      font-size: 12px;
+    }
+
+    .footer-inner strong { color: #d8b4fe; }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-links a:hover { color: white; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes rotate { to { transform: rotate(360deg); } }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 15px; }
+      .hero { padding-top: 85px; }
+      .visual { min-height: 390px; }
+      .about-panel { grid-template-columns: 1fr; gap: 25px; }
+      .about-tag { max-width: 400px; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 32px, var(--max-width)); }
+      .nav-inner { min-height: 68px; }
+      .brand { font-size: 17px; }
+      .brand-mark { width: 35px; height: 35px; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px 20px 20px;
+        border-bottom: 1px solid var(--border);
+        background: rgba(9, 7, 16, .98);
+      }
+      .nav-links.open { display: flex; flex-direction: column; }
+      .nav-links a { padding: 12px 5px; }
+      .nav-links .nav-cta { margin-top: 8px; text-align: center; }
+      .hero { min-height: auto; padding: 78px 0 55px; }
+      h1 { letter-spacing: -2.2px; }
+      .hero-copy { font-size: 15px; }
+      .hero-actions { align-items: stretch; }
+      .hero-actions .button { flex: 1 1 100%; }
+      .visual { min-height: 330px; }
+      .orbit { width: 280px; }
+      .core { width: 155px; height: 155px; border-radius: 32px; }
+      .core-symbol { font-size: 39px; }
+      .card-one { right: -2px; top: 12px; }
+      .card-two { left: -2px; bottom: 12px; }
+      .float-card { padding: 10px 11px; }
+      .float-card .mini-icon { width: 30px; height: 30px; }
+      section { padding: 72px 0; }
+      .section-head { margin-bottom: 28px; }
+      .about-panel { padding: 22px; }
+      .service-grid { grid-template-columns: 1fr; }
+      .service-card { padding: 24px; }
+      .contact-panel { padding: 45px 22px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <a class="brand" href="#">CK Technologies.</a>
-    <nav aria-label="Main navigation">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#home" aria-label="CK Technologies home">
+        <span class="brand-mark">CK</span>
+        <span>CK <span>Technologies.</span></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle"
+        aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation">
+        ☰
+      </button>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" href="#contact">Let's talk ↗</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="eyebrow">Software · Technology · Innovation</div>
-      <h1>We build technology that moves businesses forward.</h1>
-      <p class="lead">
-        CK Technologies develops practical digital solutions,
-        mobile applications and software tailored to business needs.
-      </p>
-      <a href="#services"><strong>Explore our services →</strong></a>
-    </section>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">Software · Technology · Innovation</div>
 
-    <section class="section" id="about">
-      <div class="eyebrow">Who we are</div>
-      <h2>Technology with a purpose.</h2>
-      <p class="muted">
-        We focus on building useful, reliable and accessible software.
-        Our goal is to turn business challenges into practical digital
-        experiences.
-      </p>
-    </section>
+          <h1>
+            We build technology that
+            <span class="gradient-text">moves business forward.</span>
+          </h1>
 
-    <section class="section" id="services">
-      <div class="eyebrow">What we do</div>
-      <h2>Our services</h2>
-      <div class="services">
-        <article class="service">
-          <h3>Custom Software</h3>
-          <p class="muted">Applications designed around business workflows and requirements.</p>
-        </article>
-        <article class="service">
-          <h3>Mobile Applications</h3>
-          <p class="muted">Cross-platform apps built for useful, intuitive experiences.</p>
-        </article>
-        <article class="service">
-          <h3>Web Development</h3>
-          <p class="muted">Responsive websites and modern web applications.</p>
-        </article>
-        <article class="service">
-          <h3>Business Solutions</h3>
-          <p class="muted">Digital tools to support inventory, operations and productivity.</p>
-        </article>
+          <p class="hero-copy">
+            CK Technologies develops practical digital solutions, mobile
+            applications and custom software that help businesses work
+            smarter, operate better and grow with confidence.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#services">
+              Explore our services <span aria-hidden="true">↗</span>
+            </a>
+            <a class="button button-secondary" href="#about">
+              Discover CK Technologies
+            </a>
+          </div>
+
+          <div class="hero-note">
+            <span class="status-dot"></span>
+            Thoughtful technology. Practical solutions.
+          </div>
+        </div>
+
+        <div class="visual reveal" aria-label="CK Technologies brand illustration">
+          <div class="orbit"></div>
+          <div class="core">
+            <div class="core-inner">
+              <div class="core-symbol">CK.</div>
+              <div class="core-label">Technologies</div>
+            </div>
+          </div>
+
+          <div class="float-card card-one">
+            <div class="mini-icon" aria-hidden="true">✳</div>
+            <div>
+              <strong>Digital solutions</strong>
+              <small>Designed for real needs</small>
+            </div>
+          </div>
+
+          <div class="float-card card-two">
+            <div class="mini-icon" aria-hidden="true">⌘</div>
+            <div>
+              <strong>Built with purpose</strong>
+              <small>Focused on what matters</small>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="contact">
-      <div class="contact">
-        <div class="eyebrow">Get in touch</div>
-        <h2>Have an idea? Let's build it.</h2>
-        <p class="muted">Contact us to discuss your software requirements.</p>
-        <p>Business enquiries: Add your preferred contact email before publishing.</p>
+    <section id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Who we are</div>
+          <h2>Technology with <span class="gradient-text">a purpose.</span></h2>
+          <p>
+            Good technology should make everyday work simpler, not more
+            complicated. We focus on useful, reliable and accessible software
+            built around the people and businesses that use it.
+          </p>
+        </div>
+
+        <div class="about-panel reveal">
+          <div class="about-tag">
+            <div class="big-mark">CK.</div>
+            <p>Turning business challenges into practical digital experiences.</p>
+          </div>
+
+          <div class="about-copy">
+            <h3>Practical thinking. Thoughtful engineering.</h3>
+            <p>
+              From custom business tools to mobile apps and web experiences,
+              our approach starts with understanding the problem. We aim to
+              create digital products that are straightforward to use,
+              dependable in daily work and ready to evolve as needs change.
+            </p>
+            <div class="principles">
+              <span>Purpose-driven</span>
+              <span>User-focused</span>
+              <span>Reliable by design</span>
+              <span>Built to evolve</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">What we do</div>
+          <h2>Solutions built around <span class="gradient-text">your needs.</span></h2>
+          <p>
+            Technology services designed to solve real problems and support
+            better ways of working.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card reveal">
+            <div class="service-icon" aria-hidden="true">⌘</div>
+            <h3>Custom Software</h3>
+            <p>
+              Purpose-built applications shaped around your workflows,
+              requirements and business goals.
+            </p>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon" aria-hidden="true">▣</div>
+            <h3>Mobile Applications</h3>
+            <p>
+              Cross-platform mobile experiences designed to be intuitive,
+              useful and accessible across devices.
+            </p>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon" aria-hidden="true">◇</div>
+            <h3>Web Development</h3>
+            <p>
+              Responsive websites and modern web applications that present
+              your business clearly and professionally.
+            </p>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon" aria-hidden="true">▤</div>
+            <h3>Business Solutions</h3>
+            <p>
+              Digital tools for inventory, operations and productivity that
+              help make everyday business tasks more manageable.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-panel reveal">
+          <div class="eyebrow">Get in touch</div>
+          <h2>Have an idea? Let's <span class="gradient-text">build it.</span></h2>
+          <p>
+            Have a project in mind or a business challenge to solve?
+            Get in touch to discuss your requirements and explore the next step.
+          </p>
+          <!-- Replace YOUR_EMAIL_HERE with your real business email. -->
+          <a class="button button-primary" href="mailto:YOUR_EMAIL_HERE">
+            Start a conversation <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div>© 2026 CK Technologies. All rights reserved.</div>
-    <div>Building practical digital solutions.</div>
+    <div class="container footer-inner">
+      <div>© <span id="year">2026</span> <strong>CK Technologies.</strong> All rights reserved.</div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <a href="#home">Back to top ↑</a>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label",
+        isOpen ? "Close navigation" : "Open navigation");
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach((item) => observer.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add("visible"));
+    }
+  </script>
 </body>
 </html>
